@@ -38,8 +38,33 @@ class DummyProductsServiceTests {
                 .andRespond(withSuccess("""
                         {
                           "products": [
-                            {"id": 1, "title": "Product A", "price": 10.0, "category": "beauty"},
-                            {"id": 2, "title": "Product B", "price": 20.5}
+                            {
+                              "id": 1,
+                              "title": "Product A",
+                              "description": "Description A",
+                              "category": "beauty",
+                              "brand": "BrandA",
+                              "price": 10.0,
+                              "discountPercentage": 5.5,
+                              "rating": 4.5,
+                              "stock": 12,
+                              "availabilityStatus": "In Stock",
+                              "tags": ["beauty", "skin"],
+                              "sku": "SKU-1"
+                            },
+                            {
+                              "id": 2,
+                              "title": "Product B",
+                              "description": "Description B",
+                              "category": "electronics",
+                              "brand": "BrandB",
+                              "price": 20.5,
+                              "discountPercentage": 0.0,
+                              "rating": 3.0,
+                              "stock": 0,
+                              "availabilityStatus": "Out of Stock",
+                              "tags": []
+                            }
                           ],
                           "total": 194,
                           "skip": 0,
@@ -48,8 +73,10 @@ class DummyProductsServiceTests {
                         """, MediaType.APPLICATION_JSON));
 
         assertEquals(List.of(
-                new DummyProduct(1L, "Product A", 10.0),
-                new DummyProduct(2L, "Product B", 20.5)
+                new DummyProduct(1L, "Product A", "Description A", "beauty", "BrandA",
+                        10.0, 5.5, 4.5, 12, "In Stock", List.of("beauty", "skin")),
+                new DummyProduct(2L, "Product B", "Description B", "electronics", "BrandB",
+                        20.5, 0.0, 3.0, 0, "Out of Stock", List.of())
         ), service.getDummyProducts());
         server.verify();
     }

@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### MCP JWT keys ###
+*.pem
+*.key
