@@ -1,5 +1,6 @@
 package com.demo.spring_ai_demo_mcp_server.configuration;
 
+import com.demo.spring_ai_demo_mcp_server.tool.DuffelTravelTool;
 import com.demo.spring_ai_demo_mcp_server.tool.DummyProductsTool;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
@@ -9,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 public class ToolCallbackProvider {
 
     @Bean
-    MethodToolCallbackProvider tools(DummyProductsTool tool) {
+    MethodToolCallbackProvider tools(DummyProductsTool dummyProductsTool, DuffelTravelTool duffelTravelTool) {
         return MethodToolCallbackProvider.builder()
-                .toolObjects(tool)
+                .toolObjects(dummyProductsTool, duffelTravelTool)
                 .build();
     }
 }
